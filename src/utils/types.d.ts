@@ -8,3 +8,8 @@ export interface HeroInfo {
     skin_color: string,
     eye_color: string
 }
+
+export interface SWContextValue {
+    changePage: (page: string) => void,
+    page: string,
+}
