@@ -1,17 +1,20 @@
-import Button from "./ui/Button.tsx";
-import {useContext} from "react";
-import {SWContext} from "../utils/context.ts";
+import {NavLink} from "react-router";
+import {Item} from "../utils/types";
 
 interface Props {
-    itemTitle: string;
+    item: Item
 }
 
-const NavItem = ({itemTitle}: Props) => {
-    const {changePage} = useContext(SWContext);
+const NavItem = ({item}: Props) => {
+
     return (
-        <Button callback={() => changePage(itemTitle)}>{itemTitle}</Button>
+        <NavLink
+            to={`/${item.path}`}
+            className={`text-center bg-red-color border-black border-2 rounded-md px-3 py-2 cursor-pointer hover:bg-red-500 hover:text-white `}
+        >
+            {item.title}
+        </NavLink>
     );
 };
 
 export default NavItem;
-

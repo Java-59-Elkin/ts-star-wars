@@ -6,7 +6,7 @@ const Contact = () => {
 
     async function fillPlanets(url: string) {
         const response = await fetch(url);
-        const data: {name: string}[] = await response.json(); // другой способ Array<{ name: string }>
+        const data: Array<{ name: string }> = await response.json();
         const planets = data.map(item => item.name);
         setPlanets(planets);
         localStorage.setItem('planets', JSON.stringify({
@@ -29,11 +29,13 @@ const Contact = () => {
             e.preventDefault();
         }}>
             <label className={`w-full text-red-color`}>First Name
-                <input className={`text-black border w-full p-3 border-[#ccc] rounded-[4px] mt-1.5 mb-4 resize-y`} type="text"
+                <input className={`text-black border w-full p-3 border-[#ccc] rounded-[4px] mt-1.5 mb-4 resize-y`}
+                       type="text"
                        name="firstname" placeholder="Your first name..."/>
             </label>
             <label className={`w-full text-red-color`}>Last Name
-                <input className={`text-black border w-full p-3 border-[#ccc] rounded-[4px] mt-1.5 mb-4 resize-y`} type="text"
+                <input className={`text-black border w-full p-3 border-[#ccc] rounded-[4px] mt-1.5 mb-4 resize-y`}
+                       type="text"
                        name="lastname" placeholder="Your last name..."/>
             </label>
             <label className={`w-full text-red-color`}>Planet
@@ -44,8 +46,9 @@ const Contact = () => {
                 </select>
             </label>
             <label className={`w-full text-red-color`}>Subject
-                <textarea className={`text-black border h-52 w-full p-3 border-[#ccc] rounded-[4px] mt-1.5 mb-4 resize-y`}
-                          name="subject" placeholder="Write something..."/>
+                <textarea
+                    className={`text-black border h-52 w-full p-3 border-[#ccc] rounded-[4px] mt-1.5 mb-4 resize-y`}
+                    name="subject" placeholder="Write something..."/>
             </label>
             <button
                 className={`bg-[#4CAF50] text-white py-3 px-5 border-none rounded-[4px] cursor-pointer hover:bg-[#45a049]`}

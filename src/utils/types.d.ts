@@ -1,3 +1,6 @@
+import friend0 from "../assets/main.jpg";
+import {base_url, version} from "./constants.ts";
+
 export interface HeroInfo {
     name: string,
     gender: string,
@@ -9,7 +12,17 @@ export interface HeroInfo {
     eye_color: string
 }
 
-export interface SWContextValue {
-    changePage: (page: string) => void,
-    page: string,
+export interface Item {
+    title: string,
+    path: string,
+}
+
+export interface Hero{
+    name: string,
+    img: string,
+    url: string
+}
+
+export interface Characters {
+    [key: string]: Hero;
 }
