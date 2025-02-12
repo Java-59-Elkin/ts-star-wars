@@ -2,13 +2,20 @@ import {useEffect, useState} from "react";
 import {characters, defaultHero, period_month} from "../utils/constants.ts";
 import {HeroInfo} from "../utils/types";
 import {useParams} from "react-router";
+import ErrorPage from "./ErrorPage.tsx";
 
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
     const {heroId = defaultHero} = useParams();
+    const [error, setError] = useState(false);
 
 
     useEffect(() => {
+        if (!characters[heroId]) {
+            setError(true);
+            return;
+        }
+
         const hero = JSON.parse(localStorage.getItem(heroId)!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
             setHero(hero.payload);
@@ -36,17 +43,22 @@ const AboutMe = () => {
 
     }, [])
 
-    return (
-        <>
-            {(!!hero) &&
-                <div className={'text-[2em] text-justify tracking-widest leading-14 ml-8'}>
-                    {Object.keys(hero).map(key => <p key={key}>
-                        <span className={'text-3xl capitalize'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
-                    </p>)}
-                </div>
-            }
-        </>
-    );
+    if (error) {
+        return <ErrorPage/>;
+    } else {
+        return (
+            <>
+                {(!!hero) &&
+                    <div className={'text-[2em] text-justify tracking-widest leading-14 ml-8'}>
+                        {Object.keys(hero).map(key => <p key={key}>
+                            <span
+                                className={'text-3xl capitalize'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
+                        </p>)}
+                    </div>
+                }
+            </>
+        );
+    }
 };
 
 export default AboutMe;
