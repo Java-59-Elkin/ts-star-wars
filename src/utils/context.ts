@@ -1,8 +1,8 @@
 import {createContext} from "react";
 import {SWContextValue} from "./types";
-import {navItems} from "./constants.ts";
+import {defaultHero} from "./constants.ts";
 
 export const SWContext = createContext<SWContextValue>({
-    changePage: (page: string) => console.log(page),
-    page: navItems[0]
+    hero: defaultHero,
+    changeHero: (hero: string) => console.log(hero),
 });
