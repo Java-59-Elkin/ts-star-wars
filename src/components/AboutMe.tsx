@@ -8,14 +8,11 @@ import {SWContext} from "../utils/context.ts";
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
     const {heroId = defaultHero} = useParams();
-    const [error, setError] = useState(false);
     const {changeHero} = useContext(SWContext);
-
 
     useEffect(() => {
         if (!characters[heroId]) {
-            setError(true);
-            return;
+            return
         }
         changeHero(heroId);
         const hero = JSON.parse(localStorage.getItem(heroId)!);
@@ -45,22 +42,18 @@ const AboutMe = () => {
 
     }, [])
 
-    if (error) {
-        return <ErrorPage/>;
-    } else {
-        return (
-            <>
-                {(!!hero) &&
-                    <div className={'text-[2em] text-justify tracking-widest leading-14 ml-8'}>
-                        {Object.keys(hero).map(key => <p key={key}>
-                            <span
-                                className={'text-3xl capitalize'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
-                        </p>)}
-                    </div>
-                }
-            </>
-        );
-    }
+    return characters[heroId] ? (
+        <>
+            {(!!hero) &&
+                <div className={'text-[2em] text-justify tracking-widest leading-14 ml-8'}>
+                    {Object.keys(hero).map(key => <p key={key}>
+                        <span
+                            className={'text-3xl capitalize'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
+                    </p>)}
+                </div>
+            }
+        </>
+    ) : <ErrorPage/>;
 };
 
 export default AboutMe;
