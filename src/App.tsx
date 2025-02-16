@@ -8,10 +8,11 @@ import {SWContext} from "./utils/context.ts";
 
 function App() {
     const [hero, setHero] = useState(defaultHero);
+    const [flagHero, setFlagHero] = useState(true);
 
     return (
         <SWContext.Provider value={{
-            hero, changeHero: setHero
+            hero, changeHero: setHero, flagHero, changeFlagHero: setFlagHero
         }}>
             <Header/>
             <Main/>

@@ -9,6 +9,7 @@ const AboutMe = () => {
     const {heroId = defaultHero} = useParams();
     // const {changeHero} = useContext(SWContext);
 
+
     useEffect(() => {
         // if (!characters[heroId]) {
         //     return

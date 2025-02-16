@@ -8,12 +8,14 @@ export const heroWrapper = (WrappedComponent: React.FunctionComponent) => {
     return (props: any) => {
         const {heroId = defaultHero} = useParams();
         const {changeHero} = useContext(SWContext);
+        const {changeFlagHero} = useContext(SWContext);
 
         useEffect(() => {
             if (!characters[heroId]) {
-                return
+                changeFlagHero(false);
+                return;
             }
-            changeHero(heroId);
+                changeHero(heroId);
         }, [heroId]);
 
 
